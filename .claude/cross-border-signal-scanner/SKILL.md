@@ -19,13 +19,17 @@ Scans for companies showing cross-border business activity using Parallel's Find
 
 ## Tools Used
 
-| Action | Tool | Notes |
-|--------|------|-------|
-| Find companies with signals | `parallel_findall` | Primary discovery tool |
-| Check findall results | `parallel_findall_result` | Poll until completed |
-| Supplementary web search | `mcp_Parallel_Search_web_search_preview` | Per signal type queries |
-| Deep research (targeted) | `mcp_Parallel_Task_createDeepResearch` | For "watch {company}" requests |
-| Dedup check | `mcp_Supabase_execute_sql` | `SELECT company_domain FROM bluente_leads WHERE company_domain = $1` |
+Try Parallel tools first. If they timeout or fail (status 524), fall back to native web search immediately. Don't retry Parallel more than once per tool per run.
+
+| Priority | Action | Tool | Fallback |
+|----------|--------|------|----------|
+| 1 | Find companies with signals | `parallel_findall` | Native `WebSearch` |
+| 2 | Check findall results | `parallel_findall_result` | N/A (only if findall succeeded) |
+| 3 | Supplementary web search | `mcp_Parallel_Search_web_search_preview` | Native `WebSearch` |
+| 4 | Deep research (targeted) | `mcp_Parallel_Task_createDeepResearch` | Multiple native `WebSearch` queries |
+| 5 | Dedup check | `mcp_Supabase_execute_sql` | Skip dedup, flag in output |
+
+**Fallback rule:** If a Parallel tool returns status 524 or times out, switch to native `WebSearch` for all remaining search tasks in this run. Don't mix -- once you fall back, stay on native search for the rest of the scan.
 
 ---
 
@@ -33,11 +37,11 @@ Scans for companies showing cross-border business activity using Parallel's Find
 
 ### Mode 1: Daily Scan
 
-Use `parallel_findall` to discover companies matching cross-border signal criteria. Supplement with `mcp_Parallel_Search_web_search_preview` per signal type. See `references/web-search-patterns.md` for query templates.
+Use `parallel_findall` to discover companies matching cross-border signal criteria. Supplement with `mcp_Parallel_Search_web_search_preview` per signal type (or native `WebSearch` if Parallel is down). See `references/web-search-patterns.md` for query templates.
 
 **Process:**
-1. Run `parallel_findall` with cross-border signal criteria
-2. Supplement with web search queries per signal type
+1. Try `parallel_findall` with cross-border signal criteria. If it fails, run 2-3 native `WebSearch` queries per signal type instead.
+2. Supplement with additional web search queries per signal type
 3. Score each signal
 4. Dedup against Supabase `bluente_leads` table
 5. If all results are dupes, widen search (different signal types, broader date range, adjacent industries)
