@@ -1,0 +1,78 @@
+{
+  "signals": {
+    "scan_id": "a1b2c3d4",
+    "scan_mode": "daily",
+    "scan_timestamp": "2026-03-16T08:00:00Z",
+    "signals": [
+      {
+        "company_name": "Veritas Legal Group",
+        "company_domain": "veritaslegal.com",
+        "signal_type": "merger_acquisition",
+        "urgency": 9, "relevance": 9, "translation_likelihood": 9, "composite": 729
+      },
+      {
+        "company_name": "NovaTech Manufacturing",
+        "company_domain": "novatechmfg.com",
+        "signal_type": "regulatory_compliance",
+        "urgency": 9, "relevance": 10, "translation_likelihood": 10, "composite": 900
+      },
+      {
+        "company_name": "Meridian Health Systems",
+        "company_domain": "meridianhealth.com",
+        "signal_type": "international_expansion",
+        "urgency": 8, "relevance": 9, "translation_likelihood": 8, "composite": 576
+      }
+    ],
+    "raw_signals_found": 12,
+    "after_dedup": 3
+  },
+  "leads": {
+    "scan_id": "a1b2c3d4",
+    "qualified_leads": [
+      {
+        "company_name": "Veritas Legal Group",
+        "company_domain": "veritaslegal.com",
+        "signal_type": "merger_acquisition",
+        "signal_evidence": "Completed acquisition of Sao Paulo-based Advocacia Santos, creating cross-border legal practice spanning US, UK, and Brazil.",
+        "signal_composite": 729,
+        "qualification_reason": "Legal firm M&A across English/Portuguese markets generates massive volume of precisely formatted legal documents.",
+        "translation_use_case": "Legal contracts, client agreements, compliance filings -- complex PDFs with headers, clauses, and appendices.",
+        "contact_name": "Ricardo Mendes",
+        "contact_title": "Director of Legal Operations",
+        "contact_linkedin_url": "https://linkedin.com/in/ricardo-mendes-456",
+        "contact_verified": true,
+        "urgency": "hot"
+      },
+      {
+        "company_name": "NovaTech Manufacturing",
+        "company_domain": "novatechmfg.com",
+        "signal_type": "regulatory_compliance",
+        "signal_evidence": "EU MDR compliance requiring documentation in 11 EU languages. Deadline: September 2026.",
+        "signal_composite": 900,
+        "qualification_reason": "Medical device manufacturer with hard MDR deadline. IFUs and SDS are complex formatted PDFs.",
+        "translation_use_case": "Instructions for use, safety data sheets, technical files -- 11 EU languages.",
+        "contact_name": "Sarah Kim",
+        "contact_title": "VP Regulatory Affairs",
+        "contact_linkedin_url": "https://linkedin.com/in/sarah-kim-789",
+        "contact_verified": true,
+        "urgency": "hot"
+      },
+      {
+        "company_name": "Meridian Health Systems",
+        "company_domain": "meridianhealth.com",
+        "signal_type": "international_expansion",
+        "signal_evidence": "Opening European HQ in Frankfurt, plans to support 8 EU languages by Q3 2026.",
+        "signal_composite": 576,
+        "qualification_reason": "Healthcare company expanding into EU. Patient-facing docs and regulatory submissions require precise formatting.",
+        "translation_use_case": "Patient information materials, regulatory submissions, product docs for 8 European markets.",
+        "contact_name": "Klaus Weber",
+        "contact_title": "Head of European Operations",
+        "contact_linkedin_url": "https://linkedin.com/in/klaus-weber-101",
+        "contact_verified": true,
+        "urgency": "warm"
+      }
+    ],
+    "qualified_count": 3,
+    "disqualified_count": 1
+  }
+}

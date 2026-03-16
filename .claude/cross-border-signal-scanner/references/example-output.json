@@ -1,0 +1,53 @@
+{
+  "scan_id": "a1b2c3d4",
+  "scan_mode": "daily",
+  "scan_timestamp": "2026-03-16T08:00:00Z",
+  "query_target": null,
+  "signals": [
+    {
+      "company_name": "Meridian Health Systems",
+      "company_domain": "meridianhealth.com",
+      "signal_type": "international_expansion",
+      "signal_evidence": "Meridian Health Systems announced opening of new European headquarters in Frankfurt, Germany, to support expansion into EU markets. The company plans to offer its patient management platform in 8 European languages by Q3 2026.",
+      "source_url": "https://example.com/meridian-expansion",
+      "urgency": 8,
+      "relevance": 9,
+      "translation_likelihood": 8,
+      "composite": 576,
+      "detected_languages": ["English", "German", "French", "Spanish", "Italian", "Dutch", "Portuguese", "Polish"],
+      "document_types_likely": ["patient information leaflets", "regulatory submissions", "product documentation", "marketing materials"],
+      "reasoning": "Healthcare company expanding into EU requires MDR-compliant multilingual documentation. Patient-facing materials and regulatory filings are complex formatted PDFs -- core Bluente use case."
+    },
+    {
+      "company_name": "Veritas Legal Group",
+      "company_domain": "veritaslegal.com",
+      "signal_type": "merger_acquisition",
+      "signal_evidence": "Veritas Legal Group completed acquisition of Sao Paulo-based Advocacia Santos, creating a cross-border legal practice spanning US, UK, and Brazil. Integration expected to complete by June 2026.",
+      "source_url": "https://example.com/veritas-acquisition",
+      "urgency": 9,
+      "relevance": 9,
+      "translation_likelihood": 9,
+      "composite": 729,
+      "detected_languages": ["English", "Portuguese"],
+      "document_types_likely": ["legal contracts", "compliance filings", "client agreements", "internal policies"],
+      "reasoning": "Legal firm M&A across English/Portuguese markets generates massive volume of precisely formatted legal documents needing translation. Legal PDFs require exact formatting preservation -- perfect Bluente fit."
+    },
+    {
+      "company_name": "NovaTech Manufacturing",
+      "company_domain": "novatechmfg.com",
+      "signal_type": "regulatory_compliance",
+      "signal_evidence": "NovaTech Manufacturing disclosed in SEC filing that EU MDR compliance for their medical device product line will require documentation in 11 EU languages. Compliance deadline: September 2026.",
+      "source_url": "https://example.com/novatech-mdr",
+      "urgency": 9,
+      "relevance": 10,
+      "translation_likelihood": 10,
+      "composite": 900,
+      "detected_languages": ["English", "German", "French", "Spanish", "Italian", "Dutch", "Portuguese", "Polish", "Swedish", "Danish", "Finnish"],
+      "document_types_likely": ["instructions for use", "safety data sheets", "technical files", "labeling"],
+      "reasoning": "MDR compliance with hard deadline requires precisely formatted multilingual documentation. Medical device IFUs and SDS are complex PDFs with charts, diagrams, and tables -- exactly what Bluente preserves."
+    }
+  ],
+  "raw_signals_found": 12,
+  "after_dedup": 3,
+  "dedup_method": "supabase_company_domain"
+}

@@ -1,0 +1,67 @@
+{
+  "scan_id": "a1b2c3d4",
+  "qualified_leads": [
+    {
+      "company_name": "Veritas Legal Group",
+      "company_domain": "veritaslegal.com",
+      "signal_type": "merger_acquisition",
+      "signal_evidence": "Veritas Legal Group completed acquisition of Sao Paulo-based Advocacia Santos, creating a cross-border legal practice spanning US, UK, and Brazil. Integration expected to complete by June 2026.",
+      "signal_composite": 729,
+      "qualification_reason": "Legal firm M&A across English/Portuguese markets generates massive volume of precisely formatted legal documents. Contracts, filings, and client agreements all require exact formatting preservation across languages.",
+      "translation_use_case": "Legal contracts, client agreements, compliance filings, and internal policies crossing English-Portuguese language boundary. Complex legal PDFs with headers, clauses, signature blocks, and appendices.",
+      "contact_name": "Ricardo Mendes",
+      "contact_title": "Director of Legal Operations",
+      "contact_linkedin_url": "https://linkedin.com/in/ricardo-mendes-456",
+      "contact_verified": true,
+      "contact_search_path": "Found via search_linkedin_person with company_name='Veritas Legal' + title='legal operations'. Verified via get_linkedin_person_data -- confirmed current Director of Legal Operations role since 2024.",
+      "urgency": "hot",
+      "urgency_reasoning": "Integration deadline June 2026 -- legal documents being translated NOW for merger completion. High composite score (729)."
+    },
+    {
+      "company_name": "NovaTech Manufacturing",
+      "company_domain": "novatechmfg.com",
+      "signal_type": "regulatory_compliance",
+      "signal_evidence": "NovaTech Manufacturing disclosed in SEC filing that EU MDR compliance for their medical device product line will require documentation in 11 EU languages. Compliance deadline: September 2026.",
+      "signal_composite": 900,
+      "qualification_reason": "Medical device manufacturer with hard MDR compliance deadline requiring IFUs, safety data sheets, and technical files in 11 languages. These are highly formatted documents with diagrams, tables, and regulatory-mandated layouts.",
+      "translation_use_case": "Instructions for use (IFUs), safety data sheets, technical documentation files, and product labeling -- all complex formatted PDFs requiring precise layout preservation across 11 EU languages for MDR compliance.",
+      "contact_name": "Sarah Kim",
+      "contact_title": "VP Regulatory Affairs",
+      "contact_linkedin_url": "https://linkedin.com/in/sarah-kim-789",
+      "contact_verified": true,
+      "contact_search_path": "Found via search_linkedin_person with company_name='NovaTech' + title='regulatory'. Verified via get_linkedin_person_data -- confirmed current VP Regulatory Affairs.",
+      "urgency": "hot",
+      "urgency_reasoning": "Hard MDR compliance deadline September 2026. 11 languages of complex technical documentation. Highest composite score in batch (900)."
+    },
+    {
+      "company_name": "Meridian Health Systems",
+      "company_domain": "meridianhealth.com",
+      "signal_type": "international_expansion",
+      "signal_evidence": "Meridian Health Systems announced opening of new European headquarters in Frankfurt, Germany, to support expansion into EU markets. The company plans to offer its patient management platform in 8 European languages by Q3 2026.",
+      "signal_composite": 576,
+      "qualification_reason": "Healthcare company expanding into EU with patient management platform in 8 languages. Patient-facing documentation and regulatory submissions require precise multilingual formatting.",
+      "translation_use_case": "Patient information materials, regulatory submissions for EU markets, product documentation, and marketing materials for 8 European language markets.",
+      "contact_name": "Klaus Weber",
+      "contact_title": "Head of European Operations",
+      "contact_linkedin_url": "https://linkedin.com/in/klaus-weber-101",
+      "contact_verified": true,
+      "contact_search_path": "Found via search_linkedin_person with company_name='Meridian Health' + title='european operations'. Verified via get_linkedin_person_data -- confirmed current Head of European Operations based in Frankfurt.",
+      "urgency": "warm",
+      "urgency_reasoning": "Q3 2026 target for 8-language rollout. Still in planning phase but actively setting up EU operations."
+    }
+  ],
+  "disqualified": [
+    {
+      "company_name": "TinyApp Studios",
+      "company_domain": "tinyapp.io",
+      "disqualification_reason": "8 employees, mobile app company. Translation need is UI strings and app store descriptions -- simple text content, not complex formatted documents. Below Bluente's ICP size threshold."
+    }
+  ],
+  "qualified_count": 3,
+  "disqualified_count": 1,
+  "verification_stats": {
+    "contacts_searched": 4,
+    "contacts_verified": 3,
+    "contacts_failed_verification": 0
+  }
+}
