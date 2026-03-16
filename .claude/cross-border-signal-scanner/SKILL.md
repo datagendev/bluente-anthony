@@ -9,22 +9,39 @@ description: "Scans for companies showing cross-border business signals indicati
 
 ## What This Does
 
-Scans public sources for companies showing cross-border business activity: M&A, international expansion, regulatory compliance, partnerships, and new market entry. Each signal is scored on urgency, relevance to translation, and likelihood of document translation need. Output is deduped against previously surfaced companies in Supabase.
+Scans for companies showing cross-border business activity using Parallel's FindAll and web search. Each signal is scored and deduped against Supabase.
+
+**Daily cap: max 10 new leads per scan.** Return only the top 10 by composite score after dedup.
+
+**If all results are dupes, widen the search** -- try different signal types, broaden date range, or explore adjacent industries. The goal is always to surface new leads, not return empty.
+
+---
+
+## Tools Used
+
+| Action | Tool | Notes |
+|--------|------|-------|
+| Find companies with signals | `parallel_findall` | Primary discovery tool |
+| Check findall results | `parallel_findall_result` | Poll until completed |
+| Supplementary web search | `mcp_Parallel_Search_web_search_preview` | Per signal type queries |
+| Deep research (targeted) | `mcp_Parallel_Task_createDeepResearch` | For "watch {company}" requests |
+| Dedup check | `mcp_Supabase_execute_sql` | `SELECT company_domain FROM bluente_leads WHERE company_domain = $1` |
 
 ---
 
 ## Three Modes
 
-### Mode 1: Daily Web Scan
+### Mode 1: Daily Scan
 
-Search the web for fresh cross-border signals from the past 24 hours using optimized queries per signal type. See `references/web-search-patterns.md` for query templates.
+Use `parallel_findall` to discover companies matching cross-border signal criteria. Supplement with `mcp_Parallel_Search_web_search_preview` per signal type. See `references/web-search-patterns.md` for query templates.
 
 **Process:**
-1. Run 2-3 search queries per signal type (5 types = 10-15 queries)
-2. Extract company name, domain, signal evidence from results
+1. Run `parallel_findall` with cross-border signal criteria
+2. Supplement with web search queries per signal type
 3. Score each signal
-4. Dedup against Supabase `bluente_leads` table (check `company_domain`)
-5. Return top signals sorted by composite score
+4. Dedup against Supabase `bluente_leads` table
+5. If all results are dupes, widen search (different signal types, broader date range, adjacent industries)
+6. Return top 10 new signals sorted by composite score
 
 ### Mode 2: Parallel Webhook Parse
 
@@ -120,6 +137,14 @@ SELECT company_domain FROM bluente_leads WHERE company_domain = $1;
 ```
 
 If a match exists, skip that signal (already surfaced). Exception: if the new signal is a different `signal_type` with a higher composite score, include it with a note that the company was previously surfaced for a different reason.
+
+**If all signals are dupes after dedup, don't stop.** Widen the search:
+1. Try signal types not yet searched
+2. Broaden the date range (past week instead of past 24h)
+3. Explore adjacent industries or geographies
+4. Lower the composite threshold temporarily
+
+Keep going until you have at least a few new leads or have exhausted all reasonable search variations.
 
 ---
 
