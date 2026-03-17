@@ -41,6 +41,7 @@ Run these skills in order:
 |------|------|---------|
 | `bluente_check_dedup` | `b0bb11e8-948f-482d-9f61-ab424bb40e93` | Batch check domains before qualifying |
 | `bluente_save_leads_batch` | `10a0f528-b9c1-48d8-beba-2cbc20445df7` | Batch save approved leads |
+| `bluente_export_csv` | `984bdd95-232f-4b17-bda7-5e6c85af632b` | Export leads to CSV, returns download link |
 
 Call via `submitCustomToolRun` with UUID + input_vars. Check status with `checkRunStatus`.
 
