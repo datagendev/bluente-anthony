@@ -26,6 +26,8 @@ bluente-anthony/
 ├── datagen-agent-user-guide.md            # Business context for Anthony
 └── .claude/
     ├── settings.local.json
+    ├── agents/
+    │   └── bluente-agent.md               # CANONICAL agent definition (all instructions live here)
     ├── cross-border-signal-scanner/       # Skill 1: Find cross-border signals
     │   ├── SKILL.md
     │   ├── references/
@@ -34,8 +36,8 @@ bluente-anthony/
     │   ├── SKILL.md
     │   ├── references/
     │   └── scripts/
-    └── bluente-agent/                     # Skill 3: Orchestrator
-        ├── SKILL.md
+    └── bluente-agent/                     # Orchestrator resources (refs, memory, scripts)
+        ├── SKILL.md                       # Thin pointer -> agents/bluente-agent.md
         ├── references/
         ├── scripts/
         └── memory/
@@ -55,7 +57,7 @@ Run agent
 
 1. `cross-border-signal-scanner/SKILL.md` -- find signals
 2. `lead-qualifier-and-contact-finder/SKILL.md` -- qualify + contact
-3. `bluente-agent/SKILL.md` -- orchestrate and compose output
+3. `agents/bluente-agent.md` -- orchestrate and compose output (single source of truth)
 
 ## DataGen Tool Calls
 
