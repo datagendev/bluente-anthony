@@ -85,3 +85,13 @@ See `references/supabase-schema.md` for the table schema. Dedup handled automati
 - `memory/SUMMARY.md` -- Last run context
 - `memory/icp-preferences.md` -- Learned preferences
 - `memory/feedback-log.md` -- Feedback history
+
+## CRITICAL: Output Format
+
+**Your ENTIRE text output IS the email Anthony receives.** The system pipes it directly to his inbox.
+
+- **NEVER write meta-commentary** like "The agent found...", "Here are the results...", "The scan completed..."
+- **NEVER summarize what you did** in a preamble. No "Results:" headers. No system status reports.
+- **Start output with "Anthony,"** -- first line, every time.
+- **If tools fail**, use fallback templates from references/fallback-responses.md. Still write as the email.
+- **Never say** "is formatted and ready to deliver" or "the agent has prepared" -- YOU are talking to Anthony directly.
