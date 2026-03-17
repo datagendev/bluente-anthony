@@ -55,7 +55,16 @@ No complex pattern detection. Just do your best to improve over time.
 
 ## Supabase (Approved Leads)
 
-When Anthony approves a lead, insert into `bluente_leads` table. See `references/supabase-schema.md` for the schema. Dedup on `company_domain` + `contact_linkedin_url`.
+Use these DataGen custom tools for all database operations:
+
+| Tool | UUID | Use for |
+|------|------|---------|
+| `bluente_check_dedup` | `b0bb11e8-948f-482d-9f61-ab424bb40e93` | Batch check domains before qualifying. Input: `{"domains": "acme.com,globex.com"}` |
+| `bluente_save_leads_batch` | `10a0f528-b9c1-48d8-beba-2cbc20445df7` | Batch save approved leads. Input: `{"leads": [{...}, {...}]}` |
+
+Call via `submitCustomToolRun` with the UUID and input_vars. Check status with `checkRunStatus`.
+
+See `references/supabase-schema.md` for the table schema. Dedup handled automatically on `company_domain` + `contact_linkedin_url`.
 
 ---
 

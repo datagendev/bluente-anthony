@@ -27,7 +27,7 @@ Try Parallel tools first. If they timeout or fail (status 524), fall back to nat
 | 2 | Check findall results | `parallel_findall_result` | N/A (only if findall succeeded) |
 | 3 | Supplementary web search | `mcp_Parallel_Search_web_search_preview` | Native `WebSearch` |
 | 4 | Deep research (targeted) | `mcp_Parallel_Task_createDeepResearch` | Multiple native `WebSearch` queries |
-| 5 | Dedup check | `mcp_Supabase_execute_sql` | Skip dedup, flag in output |
+| 5 | Dedup check (batch) | `bluente_check_dedup` (UUID: `b0bb11e8-948f-482d-9f61-ab424bb40e93`) | Skip dedup, flag in output |
 
 **Fallback rule:** If a Parallel tool returns status 524 or times out, switch to native `WebSearch` for all remaining search tasks in this run. Don't mix -- once you fall back, stay on native search for the rest of the scan.
 
@@ -134,13 +134,16 @@ Each signal is scored on three axes (1-10 each):
 
 ## Dedup Logic
 
-Before returning signals, check each `company_domain` against the Supabase `bluente_leads` table:
+Before returning signals, batch-check all `company_domain` values using the `bluente_check_dedup` custom tool:
 
-```sql
-SELECT company_domain FROM bluente_leads WHERE company_domain = $1;
+```
+Tool: bluente_check_dedup
+UUID: b0bb11e8-948f-482d-9f61-ab424bb40e93
+Input: { "domains": "acme.com,globex.com,initech.com" }
+Output: { "new_domains": [...], "existing_domains": [...] }
 ```
 
-If a match exists, skip that signal (already surfaced). Exception: if the new signal is a different `signal_type` with a higher composite score, include it with a note that the company was previously surfaced for a different reason.
+If a domain exists, skip that signal (already surfaced). Exception: if the new signal is a different `signal_type` with a higher composite score, include it with a note that the company was previously surfaced for a different reason.
 
 **If all signals are dupes after dedup, don't stop.** Widen the search:
 1. Try signal types not yet searched

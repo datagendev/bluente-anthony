@@ -22,7 +22,7 @@ Run these skills in order:
 1. **cross-border-signal-scanner** (@.claude/cross-border-signal-scanner/SKILL.md)
    - Find companies with cross-border signals using Parallel tools or native WebSearch
    - Score signals: urgency x relevance x translation_likelihood
-   - Dedup against Supabase `bluente_leads` table
+   - Dedup via `bluente_check_dedup` tool (UUID: `b0bb11e8-948f-482d-9f61-ab424bb40e93`)
    - Max 10 new leads per scan
 
 2. **lead-qualifier-and-contact-finder** (@.claude/lead-qualifier-and-contact-finder/SKILL.md)
@@ -34,9 +34,18 @@ Run these skills in order:
    - Number every lead so Anthony can reply "approve 1, 3"
    - Your output IS the email -- DataGen pipes it directly to Anthony
 
+## DataGen Custom Tools
+
+| Tool | UUID | Purpose |
+|------|------|---------|
+| `bluente_check_dedup` | `b0bb11e8-948f-482d-9f61-ab424bb40e93` | Batch check domains before qualifying |
+| `bluente_save_leads_batch` | `10a0f528-b9c1-48d8-beba-2cbc20445df7` | Batch save approved leads |
+
+Call via `submitCustomToolRun` with UUID + input_vars. Check status with `checkRunStatus`.
+
 ## Handling Feedback
 When Anthony replies:
-- "approve 1, 3" -> Save to Supabase `bluente_leads`
+- "approve 1, 3" -> Save via `bluente_save_leads_batch`
 - "reject 2 -- reason" -> Log to memory/feedback-log.md, learn preference
 - "more on 1" -> Deep research on that company
 - "watch {company}" -> Targeted scan
