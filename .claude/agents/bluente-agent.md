@@ -18,22 +18,58 @@ Check @.claude/bluente-agent/memory/feedback-log.md for past feedback patterns.
 Check @.claude/bluente-agent/memory/SUMMARY.md for last run context.
 
 ## Pipeline
-Run these skills in order:
 
-1. **cross-border-signal-scanner** (@.claude/cross-border-signal-scanner/SKILL.md)
-   - Find companies with cross-border signals using Parallel tools or native WebSearch
+Use TaskCreate at the start to set up all steps, then TaskUpdate as you complete each one. This keeps the run organized and recoverable.
+
+```
+TaskCreate: "1. Load context and memory"
+TaskCreate: "2. Scan for cross-border signals"
+TaskCreate: "3. Dedup against existing leads"
+TaskCreate: "4. Qualify signals for Bluente fit"
+TaskCreate: "5. Find and verify LinkedIn contacts"
+TaskCreate: "6. Compose numbered lead digest"
+TaskCreate: "7. Export CSV and attach link"
+```
+
+### Step details:
+
+1. **Load context and memory**
+   - Read user.md, bluente-context.md, icp-preferences.md, SUMMARY.md
+   - Mark task complete
+
+2. **Scan for cross-border signals** (@.claude/cross-border-signal-scanner/SKILL.md)
+   - Use Parallel tools or native WebSearch (fallback on timeout)
    - Score signals: urgency x relevance x translation_likelihood
-   - Dedup via `bluente_check_dedup` tool (UUID: `b0bb11e8-948f-482d-9f61-ab424bb40e93`)
    - Max 10 new leads per scan
+   - Mark task complete with signal count
 
-2. **lead-qualifier-and-contact-finder** (@.claude/lead-qualifier-and-contact-finder/SKILL.md)
-   - Qualify signals for Bluente fit (complex formatted docs crossing language boundaries)
-   - Find contacts using DataGen LinkedIn tools: `search_linkedin_person`, `get_linkedin_person_data`
-   - LinkedIn verification mandatory -- no unverified contacts in output
+3. **Dedup against existing leads**
+   - Call `bluente_check_dedup` (UUID: `b0bb11e8-948f-482d-9f61-ab424bb40e93`)
+   - Filter to new domains only
+   - If all dupes, widen search (back to step 2 with broader queries)
+   - Mark task complete with new vs existing counts
 
-3. **Compose output** following the digest email template
-   - Number every lead so Anthony can reply "approve 1, 3"
-   - Your output IS the email -- DataGen pipes it directly to Anthony
+4. **Qualify signals for Bluente fit** (@.claude/lead-qualifier-and-contact-finder/SKILL.md)
+   - Does the company produce complex formatted docs crossing language boundaries?
+   - Check against icp-preferences.md for learned criteria
+   - Mark task complete with qualified count
+
+5. **Find and verify LinkedIn contacts**
+   - `search_linkedin_person` by company + title
+   - `get_linkedin_person_data` to verify each contact
+   - LinkedIn verification mandatory -- no unverified contacts
+   - Mark task complete with verified count
+
+6. **Compose numbered lead digest**
+   - Follow digest-email-template.md exactly
+   - Include source URLs, full LinkedIn URLs, company links
+   - Mark task complete
+
+7. **Export CSV and attach link**
+   - Call `bluente_export_csv` (UUID: `984bdd95-232f-4b17-bda7-5e6c85af632b`)
+   - Append download link to end of digest
+   - Mark task complete
+   - OUTPUT the final digest
 
 ## DataGen Custom Tools
 
