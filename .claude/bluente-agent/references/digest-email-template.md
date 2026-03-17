@@ -15,17 +15,17 @@ Anthony,
 
 ---
 
-LEAD 1: {company_name}
+**LEAD 1: {company_name}**
 
-Signal: {signal_type}
-Evidence: {signal_evidence}
-Source: {source_url}
-Why they need translation: {qualification_reason}
-Use case: {translation_use_case}
-Contact: {contact_name}, {contact_title}
-LinkedIn: {contact_linkedin_url}
-Company: {company_website_or_linkedin_url}
-Urgency: {urgency}
+**Signal:** {signal_type}
+**Evidence:** {signal_evidence}
+**Source:** {source_url}
+**Why they need translation:** {qualification_reason}
+**Use case:** {translation_use_case}
+**Contact:** {contact_name}, {contact_title}
+**LinkedIn:** {contact_linkedin_url}
+**Company:** {company_website_or_linkedin_url}
+**Urgency:** {urgency}
 
 ---
 
@@ -54,7 +54,7 @@ CSV: {csv_download_url}
 
 1. **Number every lead.** Anthony replies by number.
 2. **Same structure for every lead.** Don't vary the format.
-3. **Plain text.** No HTML. ALL CAPS for section headers. Dashes as dividers.
+3. **Use markdown bold (`**label:**`) for field names.** Dashes as dividers between leads.
 4. **Always include action instructions** at the bottom.
 5. **Zero leads?** Just say "no signals today" and remind him he can reply with a company name.
 6. **Always include source URL.** Link to the article/press release/job posting that surfaced the signal. Anthony needs to verify the evidence is real.
